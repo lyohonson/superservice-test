@@ -9,11 +9,9 @@ import superservice.steps.SaveDataSteps;
 
 class TestBase {
 
-
   private LoginSteps loginSteps;
   private BaseSteps baseSteps;
   private SaveDataSteps saveDataSteps;
-//  private Superservice superservice;
 
   protected User getSuperTestUser(){
     return new User("supertest", "superpassword");
@@ -21,8 +19,6 @@ class TestBase {
 
   @BeforeSuite
   public void initialize() {
-//    superservice = new Superservice();
-//    Superservice.getThreadSuperservice().set(superservice);
     loginSteps().ping();
   }
 

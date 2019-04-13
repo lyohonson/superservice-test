@@ -17,6 +17,7 @@ public class LoginSteps extends BaseSteps {
         .get(EndPoints.PING)
         .then()
         .log().all()
+        .assertThat()
         .statusCode(HttpStatus.SC_OK);
   }
 

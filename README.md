@@ -3,7 +3,7 @@ To run tests firstly you need to do the following:
 
 
 To run tests:
-- Run superservice.py on http://localhost:5000
+- Check your superservice.py started on http://localhost:5000
 - Run command:
   ./test-run.sh <Path_to_your_main.db>
 
@@ -12,4 +12,4 @@ To run tests:
 
 The values for the parameters above depend on how you run superservice.
 
-Allure reports will be generated automatically and open in default browser after build.
+Allure reports will be generated automatically and opened in default browser after build.

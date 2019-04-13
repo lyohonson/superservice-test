@@ -46,20 +46,15 @@ dependencies {
     compile "io.rest-assured:rest-assured:${restAssuredVersion}"
     compile "org.projectlombok:lombok:${lombokVersion}"
     compile "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
-    compile "io.qameta.allure:allure-rest-assured:2.10.0"
-    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.2'
-    compile group: 'org.apache.logging.log4j', name: 'log4j-iostreams', version: '2.11.2'
-    testCompile "org.testng:testng:${testNgVersion}"
-    testCompile "ch.qos.logback:logback-classic:${logbackVersion}"
-    testCompile 'org.awaitility:awaitility:3.1.6'
+    compile "io.qameta.allure:allure-rest-assured:${allureRestAssuredVersion}"
     compile "org.assertj:assertj-core:${assertjVersion}"
-    compile "org.apache.logging.log4j:log4j-core:${log4Version}"
-    compile "org.xerial:sqlite-jdbc:3.7.2"
-    compile "org.jooq:jooq:3.11.11"
-    compile 'org.jooq:jooq-codegen:3.11.11'
-    compile 'org.jooq:jooq-meta:3.11.11'
-//    compile 'io.github.sskorol:test-data-supplier:1.7.0'
-    jooqRuntime "org.xerial:sqlite-jdbc:3.7.2"
+    compile "org.jooq:jooq:${jooqVersion}"
+    compile "org.jooq:jooq-codegen:${jooqVersion}"
+    compile "org.jooq:jooq-meta:${jooqVersion}"
+    compile "org.xerial:sqlite-jdbc:${sqliteJdbcVersion}"
+    jooqRuntime "org.xerial:sqlite-jdbc:${sqliteJdbcVersion}"
+    testCompile "org.testng:testng:${testNgVersion}"
+    testCompile "org.awaitility:awaitility:${awaitilityVersion}"
 }
 
 allure {
@@ -121,7 +116,7 @@ test {
 
 
 jooq {
-    version = '3.11.11'
+    version = "${jooqVersion}"
     edition = 'OSS'
 
     dev(sourceSets.main) {

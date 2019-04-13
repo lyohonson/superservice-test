@@ -35,8 +35,8 @@ public class SaveDataTest extends TestBase {
     return new Object[][]{
         {new SaveDataRequest(vGen.getCyrillicRandomString()), URLENC},
         {new SaveDataRequest(vGen.getCyrillicRandomString()), JSON},
-        {new SaveDataRequest(vGen.getRandomString(100000000)), URLENC},
-        {new SaveDataRequest(vGen.getRandomString(100000000)), JSON},
+        {new SaveDataRequest(vGen.getRandomString(100000)), URLENC},
+        {new SaveDataRequest(vGen.getRandomString(100000)), JSON},
         {new SaveDataRequest(vGen.getRandomJson()), URLENC},
         {new SaveDataRequest(vGen.getRandomJson()), JSON},
         {new SaveDataRequest("w"), JSON},
@@ -46,7 +46,7 @@ public class SaveDataTest extends TestBase {
         {new SaveDataRequest("  "), JSON},
         {new SaveDataRequest("  "), URLENC},
         {new SaveDataRequest("\n"), JSON},
-        {new SaveDataRequest(" \n"), URLENC},
+        {new SaveDataRequest("\n"), URLENC},
         {new SaveDataRequest("腿"), JSON},
         {new SaveDataRequest("腿"), URLENC},
         {new SaveDataRequest("1234567890"), JSON},
@@ -159,16 +159,25 @@ public class SaveDataTest extends TestBase {
 
   @DataProvider(parallel = true)
   private Object[][] provideContentTypes() {
-    byte[] decoded = "payload=12345678".getBytes();
+    byte[] decodedPayload = "payload=12345678".getBytes();
+    byte[] decodedField = "field=12345678".getBytes();
     return new Object[][] {
         {rest(baseSteps().getSuperTestToken()).contentType(ContentType.TEXT)
           .body("payload=1234")},
+        {rest(baseSteps().getSuperTestToken()).contentType(ContentType.TEXT)
+          .body("text=1234")},
         {rest(baseSteps().getSuperTestToken()).contentType(ContentType.BINARY)
-          .body(decoded)},
+          .body(decodedPayload)},
         {rest(baseSteps().getSuperTestToken()).contentType(ContentType.ANY)
-          .body(decoded)},
+          .body(decodedPayload)},
+        {rest(baseSteps().getSuperTestToken()).contentType(ContentType.BINARY)
+          .body(decodedField)},
+        {rest(baseSteps().getSuperTestToken()).contentType(ContentType.ANY)
+          .body(decodedField)},
         {rest(baseSteps().getSuperTestToken()).contentType(ContentType.HTML)
           .body("payload=123456")},
+        {rest(baseSteps().getSuperTestToken()).contentType(ContentType.HTML)
+          .body("field=123456")},
         {rest(baseSteps().getSuperTestToken()).contentType(ContentType.XML)
           .body("payload=1234567890")},
         {rest(baseSteps().getSuperTestToken()).contentType(ContentType.XML)
