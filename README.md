@@ -5,10 +5,10 @@ To run tests firstly you need to do the following:
 To run tests:
 - Check your superservice.py started on http://localhost:5000
 - Run command:
-  ./test-run.sh <Path_to_your_main.db>
+  ./test-run.sh <Full_path_to_your_main.db>
 
   or run:
-  ./gradlew -DserviceHost=localhost -DservicePort=5000 -DdbPath=<Path_to_your_main.db>
+  ./gradlew -DserviceHost=localhost -DservicePort=5000 -DdbPath=<Full_path_to_your_main.db>
 
 The values for the parameters above depend on how you run superservice.
 
