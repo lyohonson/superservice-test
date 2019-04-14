@@ -20,9 +20,10 @@ public class AuthorizationTest extends TestBase{
         .as("Check token value is not empty")
         .isNotNull().isNotEqualTo("");
 //        .matches("\\b[0-9a-f]{8}\\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\\b[0-9a-f]{12}\\b");
+//        set simple check, because it's black box testing
   }
 
-  @DataProvider(parallel = true)
+  @DataProvider
   public Object[][] users() {
     return new Object[][]{
         {new User("", "superpassword")},
