@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="REST test" data-provider-thread-count="5">
-  <test name="SaveData tests" parallel="methods" thread-count="5">
-    <classes>
-      <class name="superservice.SaveDataTest"/>
-    </classes>
-  </test>
   <test name="Authorization tests">
     <classes>
       <class name="superservice.AuthorizationTest"/>
       <class name="superservice.TokenLiveTest"/>
+    </classes>
+  </test>
+  <test name="SaveData tests" parallel="methods" thread-count="5">
+    <classes>
+      <class name="superservice.SaveDataTest"/>
     </classes>
   </test>
 </suite>
