@@ -8,7 +8,7 @@
   </test>
   <test name="Authorization tests">
     <classes>
-      <class name="superservice.LoginTest"/>
+      <class name="superservice.AuthorizationTest"/>
       <class name="superservice.TokenLiveTest"/>
     </classes>
   </test>

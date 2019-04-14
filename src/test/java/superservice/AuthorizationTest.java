@@ -10,7 +10,7 @@ import superservice.model.AuthorizeResponse;
 import superservice.model.User;
 
 @Feature("Authorization")
-public class LoginTest extends TestBase{
+public class AuthorizationTest extends TestBase{
   private static ValuesGenerator vGen = ValuesGenerator.getInstance();
 
   @Test

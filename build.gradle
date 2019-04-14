@@ -111,6 +111,7 @@ test {
     }
 
     testLogging.showStandardStreams = true
+    finalizedBy("downloadAllure")
     finalizedBy("allureServe")
 }
 
