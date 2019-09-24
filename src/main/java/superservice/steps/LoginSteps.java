@@ -29,7 +29,7 @@ public class LoginSteps extends BaseSteps {
   }
 
 
-  public void setNewAuthorizationHeader(String token) {
+  private void setNewAuthorizationHeader(String token) {
     rest().headers(new Headers(new Header("Authorization", "Bearer " + token)));
   }
 

@@ -13,7 +13,7 @@ class TestBase {
   private BaseSteps baseSteps;
   private SaveDataSteps saveDataSteps;
 
-  protected User getSuperTestUser(){
+  User getSuperTestUser(){
     return new User("supertest", "superpassword");
   }
 
@@ -22,28 +22,28 @@ class TestBase {
     loginSteps().ping();
   }
 
-  protected RequestSpecification rest(){
+  RequestSpecification rest(){
     return baseSteps().rest();
   }
 
-  protected RequestSpecification rest(String token){
+  RequestSpecification rest(String token){
     return baseSteps().rest(token);
   }
 
 
-  protected SaveDataSteps saveDataSteps(){
+  SaveDataSteps saveDataSteps(){
     if(saveDataSteps == null){
       saveDataSteps = new SaveDataSteps();
     }
     return saveDataSteps;
   }
-  protected BaseSteps baseSteps(){
+  private BaseSteps baseSteps(){
     if(baseSteps == null){
       baseSteps = new BaseSteps();
     }
     return baseSteps;
   }
-  protected LoginSteps loginSteps(){
+  LoginSteps loginSteps(){
     if(loginSteps == null){
       loginSteps = new LoginSteps();
     }

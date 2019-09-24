@@ -50,7 +50,7 @@ public class ValuesGenerator {
     return builder.toString();
   }
 
-  public int nextRandomInt(Integer limit) {
+  public static int nextRandomInt(Integer limit) {
     int rand = rnd.nextInt(limit);
     if (rand == 0) {
       rand += 1;
@@ -80,7 +80,7 @@ public class ValuesGenerator {
     return new String(fdsl.toString().getBytes(), StandardCharsets.UTF_8);
   }
 
-  public String getRandomJson() {
+  public static String getRandomJson() {
     return "{\"" + getRandomString(4) + "\": {\"" + getRandomString(5) + "\": \"" + getRandomString(
         5) + "\"},"
         + " \"" + getRandomString(6) + "\": [\"" + getRandomString(3) + "\", \"" + getRandomString(

@@ -1,8 +1,8 @@
 package superservice.steps;
 
-import static io.restassured.RestAssured.config;
 import static io.restassured.config.EncoderConfig.encoderConfig;
 import static io.restassured.config.HeaderConfig.headerConfig;
+import static io.restassured.config.RestAssuredConfig.config;
 
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;

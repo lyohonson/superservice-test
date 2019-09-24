@@ -8,9 +8,9 @@ import org.sqlite.JDBC;
 
 public class JooqClient {
 
-  private static final String dbFilePath = System.getProperty("dbPath");
+  private static final String DB_FILE_PATH = System.getProperty("dbPath");
   private static final String CON_STR =
-      "jdbc:sqlite:" + dbFilePath;
+      "jdbc:sqlite:" + DB_FILE_PATH;
 
   private static JooqClient instance = null;
 
@@ -28,7 +28,7 @@ public class JooqClient {
   @Getter
   private Connection connection;
 
-  protected JooqClient() throws SQLException {
+  private JooqClient() throws SQLException {
     DriverManager.registerDriver(new JDBC());
     this.connection = DriverManager.getConnection(CON_STR);
   }

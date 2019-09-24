@@ -11,7 +11,6 @@ import superservice.model.User;
 
 @Feature("Authorization")
 public class AuthorizationTest extends TestBase{
-  private static ValuesGenerator vGen = ValuesGenerator.getInstance();
 
   @Test
   public void userAuthorize() {
@@ -45,8 +44,8 @@ public class AuthorizationTest extends TestBase{
         {new User("supertest", "superpassword ")},
         {new User(" supertest", "superpassword")},
         {new User("supertest", " superpassword")},
-        {new User(vGen.getRandomString(100000), "superpassword")},
-        {new User("supertest", vGen.getRandomString(100000))}
+        {new User(ValuesGenerator.getRandomString(100000), "superpassword")},
+        {new User("supertest", ValuesGenerator.getRandomString(100000))}
     };
   }
 

@@ -14,14 +14,13 @@ import superservice.model.SaveDataRequest;
 
 @Feature("Authorization")
 public class TokenLiveTest extends TestBase {
-  private static ValuesGenerator vGen = ValuesGenerator.getInstance();
 
   @Description("Authorize twice and save data with token from 1st authorization")
   @Test
   public void failIfSaveDataWithOldToken() {
     AuthorizeResponse response = loginSteps().login(getSuperTestUser());
     loginSteps().login(getSuperTestUser());
-    saveDataSteps().saveDataCheckStatusCode(new SaveDataRequest(vGen.getRandomString(10)), JSON,
+    saveDataSteps().saveDataCheckStatusCode(new SaveDataRequest(ValuesGenerator.getRandomString(10)), JSON,
             response.getToken(), HttpStatus.SC_FORBIDDEN);
   }
 
@@ -37,7 +36,7 @@ public class TokenLiveTest extends TestBase {
               () ->
                 rest(response.getToken())
                     .contentType(JSON)
-                    .body(new SaveDataRequest(vGen.getRandomJson()))
+                    .body(new SaveDataRequest(ValuesGenerator.getRandomJson()))
                     .when().log().all()
                     .post(EndPoints.SAVE_DATA)
                     .then().log().all()

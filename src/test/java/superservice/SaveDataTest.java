@@ -14,6 +14,7 @@ import org.apache.http.HttpStatus;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import superservice.steps.BaseSteps;
 import superservice.steps.Verifications;
 import superservice.model.SaveDataRequest;
 import superservice.model.SaveDataResponse;
@@ -22,7 +23,6 @@ import superservice.model.SaveDataResponse;
 @Feature("SaveData")
 public class SaveDataTest extends TestBase {
 
-  private static ValuesGenerator vGen = ValuesGenerator.getInstance();
 
   @BeforeClass
   public void login() {
@@ -33,12 +33,12 @@ public class SaveDataTest extends TestBase {
   @DataProvider(parallel = true)
   public Object[][] data() {
     return new Object[][]{
-        {new SaveDataRequest(vGen.getCyrillicRandomString()), URLENC},
-        {new SaveDataRequest(vGen.getCyrillicRandomString()), JSON},
-        {new SaveDataRequest(vGen.getRandomString(100000)), URLENC},
-        {new SaveDataRequest(vGen.getRandomString(100000)), JSON},
-        {new SaveDataRequest(vGen.getRandomJson()), URLENC},
-        {new SaveDataRequest(vGen.getRandomJson()), JSON},
+        {new SaveDataRequest(ValuesGenerator.getCyrillicRandomString()), URLENC},
+        {new SaveDataRequest(ValuesGenerator.getCyrillicRandomString()), JSON},
+        {new SaveDataRequest(ValuesGenerator.getRandomString(100000)), URLENC},
+        {new SaveDataRequest(ValuesGenerator.getRandomString(100000)), JSON},
+        {new SaveDataRequest(ValuesGenerator.getRandomJson()), URLENC},
+        {new SaveDataRequest(ValuesGenerator.getRandomJson()), JSON},
         {new SaveDataRequest("w"), JSON},
         {new SaveDataRequest("e"), URLENC},
         {new SaveDataRequest(" "), JSON},
@@ -78,7 +78,7 @@ public class SaveDataTest extends TestBase {
     return new Object[][] {
         {rest()},
         {rest().header("Authorization", "Bearer "
-            + vGen.getRandomString(10))},
+            + ValuesGenerator.getRandomString(10))},
         {rest().header("Authorization", "Bearer e")},
         {rest().header("Authorization", "Bearer ")},
         {rest().header("Authorization", "")}
@@ -89,7 +89,7 @@ public class SaveDataTest extends TestBase {
   @Test(dataProvider = "provideRequestSpecs")
   public void failWhenSaveDataWithInvalidToken(RequestSpecification spec){
     saveDataSteps().saveDataCheckStatusCode(
-        new SaveDataRequest(vGen.getRandomString(10)), spec, HttpStatus.SC_FORBIDDEN);
+        new SaveDataRequest(ValuesGenerator.getRandomString(10)), spec, HttpStatus.SC_FORBIDDEN);
   }
 
 
@@ -110,7 +110,7 @@ public class SaveDataTest extends TestBase {
 
   @Test
   public void saveInvalidJsonInsteadSaveDataBody() {
-    rest(baseSteps().getSuperTestToken()).contentType(JSON).body(vGen.getRandomJson())
+    rest(BaseSteps.getSuperTestToken()).contentType(JSON).body(ValuesGenerator.getRandomJson())
         .when()
         .post(EndPoints.SAVE_DATA)
         .then()
@@ -120,8 +120,8 @@ public class SaveDataTest extends TestBase {
 
   @Test
   public void saveInvalidFields() {
-    rest(baseSteps().getSuperTestToken()).contentType(URLENC)
-        .param(vGen.getRandomString(5), vGen.nextRandomInt(100))
+    rest(BaseSteps.getSuperTestToken()).contentType(URLENC)
+        .param(ValuesGenerator.getRandomString(5), ValuesGenerator.nextRandomInt(100))
         .when()
         .post(EndPoints.SAVE_DATA)
         .then()
@@ -140,7 +140,7 @@ public class SaveDataTest extends TestBase {
 
   @Test(dataProvider = "provideContentType")
   public void saveSameDataTwice(ContentType contentType) throws SQLException {
-    String string = vGen.getRandomString(8);
+    String string = ValuesGenerator.getRandomString(8);
     SaveDataRequest saveDataRequest = new SaveDataRequest(string);
     SaveDataResponse resp1 = saveDataSteps().saveData(saveDataRequest, contentType);
     assertThat(resp1).isSuccessful();
@@ -162,25 +162,25 @@ public class SaveDataTest extends TestBase {
     byte[] decodedPayload = "payload=12345678".getBytes();
     byte[] decodedField = "field=12345678".getBytes();
     return new Object[][] {
-        {rest(baseSteps().getSuperTestToken()).contentType(ContentType.TEXT)
+        {rest(BaseSteps.getSuperTestToken()).contentType(ContentType.TEXT)
           .body("payload=1234")},
-        {rest(baseSteps().getSuperTestToken()).contentType(ContentType.TEXT)
+        {rest(BaseSteps.getSuperTestToken()).contentType(ContentType.TEXT)
           .body("text=1234")},
-        {rest(baseSteps().getSuperTestToken()).contentType(ContentType.BINARY)
+        {rest(BaseSteps.getSuperTestToken()).contentType(ContentType.BINARY)
           .body(decodedPayload)},
-        {rest(baseSteps().getSuperTestToken()).contentType(ContentType.ANY)
+        {rest(BaseSteps.getSuperTestToken()).contentType(ContentType.ANY)
           .body(decodedPayload)},
-        {rest(baseSteps().getSuperTestToken()).contentType(ContentType.BINARY)
+        {rest(BaseSteps.getSuperTestToken()).contentType(ContentType.BINARY)
           .body(decodedField)},
-        {rest(baseSteps().getSuperTestToken()).contentType(ContentType.ANY)
+        {rest(BaseSteps.getSuperTestToken()).contentType(ContentType.ANY)
           .body(decodedField)},
-        {rest(baseSteps().getSuperTestToken()).contentType(ContentType.HTML)
+        {rest(BaseSteps.getSuperTestToken()).contentType(ContentType.HTML)
           .body("payload=123456")},
-        {rest(baseSteps().getSuperTestToken()).contentType(ContentType.HTML)
+        {rest(BaseSteps.getSuperTestToken()).contentType(ContentType.HTML)
           .body("field=123456")},
-        {rest(baseSteps().getSuperTestToken()).contentType(ContentType.XML)
+        {rest(BaseSteps.getSuperTestToken()).contentType(ContentType.XML)
           .body("payload=1234567890")},
-        {rest(baseSteps().getSuperTestToken()).contentType(ContentType.XML)
+        {rest(BaseSteps.getSuperTestToken()).contentType(ContentType.XML)
           .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
             + "<root>\n"
             + "   <payload>2134567</payload>\n"

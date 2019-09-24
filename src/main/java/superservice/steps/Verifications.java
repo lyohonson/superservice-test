@@ -15,6 +15,8 @@ import superservice.db.Tables;
 
 public class Verifications {
 
+  private Verifications() {}
+
   public static Result<Record> getAllRowsFromTableWhere(TableImpl table, Condition condition)
       throws SQLException {
     return DSL.using(JooqClient.getInstance().getConnection(), SQLDialect.SQLITE).
